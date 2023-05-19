@@ -21,7 +21,7 @@
                             <div class="col-sm-4 bg-c-lite-green user-profile">
                                 <div class="card-block text-center text-white">
                                     <div class="m-b-25">
-                                        <img src={{ asset($data['avatar']) }} class="img-radius w-50"
+                                        <img src="/storage/avatar/{{ $data['avatar'] }}" class="img-radius w-50"
                                             alt="User-Profile-Image">
                                     </div>
                                     <h6 class="f-w-600">{{ $data['name'] }}</h6>

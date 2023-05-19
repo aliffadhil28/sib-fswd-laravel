@@ -57,7 +57,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Aksi</th>
-                    {{-- <th scope="col">Avatar</th> --}}
+                    <th scope="col">Avatar</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone Number</th>
@@ -75,7 +75,7 @@
                             <button type='button' class='btn btn-warning'>
                                 <a class='text-light' href='{{ route('user.edit', $row->id) }}'>Edit</a>
                             </button>
-                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                            <form class='mt2' onsubmit="return confirm('Apakah Anda Yakin ?');"
                                 action="{{ route('user.destroy', $row->id) }}" method="post">
                                 @csrf
                                 @method('delete')
