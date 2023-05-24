@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function getUser(){
         $user = User::all();
-        return view('user.index')->with('user', $user);
+        return view('user.user')->with('user', $user);
     }
 
     public function create()
@@ -76,12 +76,12 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'avatar' => 'image|mimes:jpg,jpeg,png|max:2048',
-            'name' => 'required',
-            'address' => 'required',
-            'role' => 'required',
-            'phone' => 'required',
-            'password' => 'required',
-            'email' => 'required',
+            // 'name' => 'required',
+            // 'address' => 'required',
+            // 'role' => 'required',
+            // 'phone' => 'required',
+            // 'password' => 'required',
+            // 'email' => 'required',
         ]);
 
         $user = User::findOrFail($id);
@@ -90,7 +90,7 @@ class UserController extends Controller
             $avatar = $request->file('avatar');
             $avatar->storeAs('public/avatar',$avatar->hashName());
 
-            Storage::delete('public/posts/'.$user->avatar);
+            Storage::delete('public/avatar/'.$user->avatar);
 
             $user->update([
                 'avatar' => $avatar->hashName(),
