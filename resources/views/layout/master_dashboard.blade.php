@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>@yield('title') {{ config('LoakStation') }}</title>
+    @yield('style')
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="{{ asset('css/dashboard/index.css') }}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -51,7 +52,7 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="/dashboard">
+                        <a class="nav-link @if (Request::is('dashboard')) active @endif" href="/dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
@@ -74,11 +75,16 @@
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="/admin">Admin</a>
-                                        <a class="nav-link" href="/staff">Staff</a>
+                                        <a class="nav-link @if (Request::is('admin')) active @endif"
+                                            href="/admin">Admin</a>
+                                        <a class="nav-link @if (Request::is('penjual')) active @endif"
+                                            href="/penjual">Penjual</a>
+                                        <a class="nav-link @if (Request::is('pembeli')) active @endif"
+                                            href="/pembeli">Pembeli</a>
                                     </nav>
                                 </div>
-                                <a class="nav-link" href="/users">Daftar User</a>
+                                <a class="nav-link @if (Request::is('user')) active @endif"
+                                    href="/user">Daftar User</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -87,43 +93,10 @@
                             Products
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        {{-- <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                    Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">Login</a>
-                                        <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseError" aria-expanded="false"
-                                    aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="401.html">401 Page</a>
-                                        <a class="nav-link" href="404.html">404 Page</a>
-                                        <a class="nav-link" href="500.html">500 Page</a>
-                                    </nav>
-                                </div>
-                            </nav>
-                        </div> --}}
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                                     data-bs-target="#pagesCollapseError" aria-expanded="false"
                                     aria-controls="pagesCollapseError">
                                     Kategori
@@ -132,21 +105,18 @@
                                 <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link active" href="/kategori_1">Kategori 1</a>
-                                        <a class="nav-link" href="/kategori_2">Kategori 2</a>
-                                        <a class="nav-link" href="/kategori_3">Kategori 3</a>
-                                        <a class="nav-link" href="/kategori_4">Kategori 4</a>
-                                        <a class="nav-link" href="/kategori_5">Kategori 5</a>
-                                        <a class="nav-link" href="/kategori_6">Kategori 6</a>
-                                        <a class="nav-link" href="/kategori_7">Kategori 7</a>
-                                        <a class="nav-link" href="/kategori_8">Kategori 8</a>
-                                        <a class="nav-link" href="/kategori_9">Kategori 9</a>
-                                        <a class="nav-link" href="/kategori_10">Kategori 10</a>
-                                        <a class="nav-link" href="/kategori_11">Kategori 11</a>
-                                        <a class="nav-link" href="/kategori_12">Kategori 12</a>
+                                        <a class="nav-link @if (Request::is('shoes')) active @endif"
+                                            href="/shoes">Shoes</a>
+                                        <a class="nav-link @if (Request::is('items')) active @endif"
+                                            href="/items">Items</a>
+                                        <a class="nav-link @if (Request::is('accessories')) active @endif"
+                                            href="/accessories">Accessories</a>
                                     </nav>
-                                </div>
-                                <a class="nav-link" href="/products">Daftar Produk</a>
+                                </div> --}}
+                                <a class="nav-link @if (Request::is('products')) active @endif"
+                                    href="/categories">Daftar Categories</a>
+                                <a class="nav-link @if (Request::is('products')) active @endif"
+                                    href="/produk">Daftar Produk</a>
                             </nav>
                         </div>
                         {{-- <div class="sb-sidenav-menu-heading">Addons</div>
@@ -168,47 +138,7 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4">
-                    <h1 class="my-4">Kategori 1</h1>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            Product
-                        </div>
-                        <div class="card-body">
-                            <table id="datatablesSimple">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Price</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                {{-- <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot> --}}
-                                <tbody>
-                                    @foreach ($product as $produk)
-                                        <tr>
-                                            <td>{{ $produk['name'] }}</td>
-                                            <td>{{ $produk['description'] }}</td>
-                                            <td>{{ $produk['price'] }}</td>
-                                            <td>{{ $produk['status'] }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                @yield('content')
             </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
@@ -224,6 +154,7 @@
             </footer>
         </div>
     </div>
+    @yield('script')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="{{ asset('js/dashboard/index.js') }}"></script>

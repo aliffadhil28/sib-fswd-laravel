@@ -12,12 +12,9 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        // if ($request->hasCookie('checkLogin'== false)) {
-        //     return view('/login');
-        // }else{
-        //     $user = User::all();
-        //     return view('/')->with('user', $user);
-        // }
+        $data = User::all();
+
+        return view('user.user')->with('data', $data);
     }
 
     public function getUser(){

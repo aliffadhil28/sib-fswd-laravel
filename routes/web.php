@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\App\Http\Controller;
 
@@ -17,25 +20,20 @@ use Illuminate\App\Http\Controller;
 */
 
 // Route::get('/', [UserController::class, 'getUser'])->name('home');
-// Route::resource('user', UserController::class);
+Route::resource('user', UserController::class);
+Route::resource('produk', ProductController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('slider', SliderController::class);
 Route::get('/',[HomeController::class, 'index']);
 Route::get('/dashboard',[HomeController::class, 'showDashboard']);
-Route::get('/admin',[HomeController::class, 'showAdmin']);
-Route::get('/staff',[HomeController::class, 'showStaff']);
-Route::get('/users',[HomeController::class, 'showUsers']);
-Route::get('/kategori_1',[HomeController::class, 'showKategori1']);
-Route::get('/kategori_2',[HomeController::class, 'showKategori2']);
-Route::get('/kategori_3',[HomeController::class, 'showKategori3']);
-Route::get('/kategori_4',[HomeController::class, 'showKategori4']);
-Route::get('/kategori_5',[HomeController::class, 'showKategori5']);
-Route::get('/kategori_6',[HomeController::class, 'showKategori6']);
-Route::get('/kategori_7',[HomeController::class, 'showKategori7']);
-Route::get('/kategori_8',[HomeController::class, 'showKategori8']);
-Route::get('/kategori_9',[HomeController::class, 'showKategori9']);
-Route::get('/kategori_10',[HomeController::class, 'showKategori10']);
-Route::get('/kategori_11',[HomeController::class, 'showKategori11']);
-Route::get('/kategori_12',[HomeController::class, 'showKategori12']);
-Route::get('/products',[HomeController::class, 'showProducts']);
+Route::get('/admin',[HomeController::class, 'showAdmin'])->name('admin');
+Route::get('/penjual',[HomeController::class, 'showPenjual'])->name('penjual');
+Route::get('/pembeli',[HomeController::class, 'showPembeli'])->name('pembeli');
+Route::get('/users',[HomeController::class, 'showUsers'])->name('users');
+Route::get('/shoes',[HomeController::class, 'showShoes'])->name('shoes');
+Route::get('/items',[HomeController::class, 'showItems'])->name('items');
+Route::get('/accessories',[HomeController::class, 'showAccessories'])->name('accessories');
+Route::get('/products',[HomeController::class, 'showProducts'])->name('users');
 // Route::get('/insert',[UserController::class,'showInsert']);
 // Route::post('add',[UserController::class,'addUser']);
 // Route::get('/detail/{id}',[UserController::class, 'showUser']);

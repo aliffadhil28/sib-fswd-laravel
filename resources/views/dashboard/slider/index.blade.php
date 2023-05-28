@@ -1,17 +1,17 @@
 @extends('layout.master_dashboard')
 
-@section('title', 'Daftar User')
+@section('title', 'Daftar Slider')
 
 @section('content')
     <div class="container-fluid px-4">
         <div class="d-flex flex-row justify-content-between">
-            <h1>Daftar User</h1>
-            <a class="btn btn-primary my-3" href="slider/create">Tambah User</a>
+            <h1>Daftar Slider</h1>
+            <a class="btn btn-primary my-3" href="slider/create">Tambah Slider</a>
         </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Users
+                Slider
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
@@ -19,10 +19,10 @@
                         <tr>
                             <th>Action</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Avatar</th>
-                            <th>Address</th>
-                            <th>Role</th>
+                            <th>Text</th>
+                            <th>Image</th>
+                            <th>Url</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     {{-- <tfoot>
@@ -63,11 +63,17 @@
                                     </div>
                                 </td>
                                 <td>{{ $d->name }}</td>
-                                <td>{{ $d->email }}</td>
-                                <td><img src="/storage/image/{{ $d->avatar }}" alt="slider_image" class="w-25 rounded">
+                                <td>{{ $d->text }}</td>
+                                <td><img src="/storage/image/{{ $d->image }}" alt="slider_image" class="w-25 rounded">
                                 </td>
-                                <td>{{ $d->address }}</td>
-                                <td>{{ $d->role }}</td>
+                                <td>{{ $d->url }}</td>
+                                <td>
+                                    @if ($d->is_active == 0)
+                                        Not Active
+                                    @else
+                                        Active
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

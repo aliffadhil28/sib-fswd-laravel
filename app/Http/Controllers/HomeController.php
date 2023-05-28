@@ -27,11 +27,17 @@ class HomeController extends Controller
         return view('dashboard.admin',compact('admin'));
     }
 
-    public function showStaff()
+    public function showPenjual()
     {
-        $staff = User::all()->where('role', '=','staff');
+        $penjual = User::all()->where('role', '=','penjual');
 
-        return view('dashboard.staff',compact('staff'));
+        return view('dashboard.penjual',compact('penjual'));
+    }
+    public function showPembeli()
+    {
+        $pembeli = User::all()->where('role', '=','pembeli');
+
+        return view('dashboard.pembeli',compact('pembeli'));
     }
     public function showUsers()
     {
@@ -40,79 +46,25 @@ class HomeController extends Controller
         return view('dashboard.users',compact('users'));
     }
 
-    public function showKategori1()
+    public function showShoes()
     {
-        $product = Products::all()->where('category_id', '=','1');
+        $sepatu = Products::all()->where('categories_id', '=','1');
 
-        return view('dashboard.kategori.kategori_1',compact('product'));
+        return view('dashboard.kategori.sepatu',compact('sepatu'));
     }
-    public function showKategori2()
+    public function showItems()
     {
-        $product = Products::all()->where('category_id', '=','2');
+        $items = Products::all()->where('categories_id', '=','3');
 
-        return view('dashboard.kategori.kategori_2',compact('product'));
+        return view('dashboard.kategori.items',compact('items'));
     }
-    public function showKategori3()
+    public function showAccessories()
     {
-        $product = Products::all()->where('category_id', '=','3');
+        $aksesories = Products::all()->where('categories_id', '=','2');
 
-        return view('dashboard.kategori.kategori_3',compact('product'));
-    }
-    public function showKategori4()
-    {
-        $product = Products::all()->where('category_id', '=','4');
-
-        return view('dashboard.kategori.kategori_4',compact('product'));
-    }
-    public function showKategori5()
-    {
-        $product = Products::all()->where('category_id', '=','5');
-
-        return view('dashboard.kategori.kategori_5',compact('product'));
-    }
-    public function showKategori6()
-    {
-        $product = Products::all()->where('category_id', '=','6');
-
-        return view('dashboard.kategori.kategori_6',compact('product'));
-    }
-    public function showKategori7()
-    {
-        $product = Products::all()->where('category_id', '=','7');
-
-        return view('dashboard.kategori.kategori_7',compact('product'));
-    }
-    public function showKategori8()
-    {
-        $product = Products::all()->where('category_id', '=','8');
-
-        return view('dashboard.kategori.kategori_8',compact('product'));
-    }
-    public function showKategori9()
-    {
-        $product = Products::all()->where('category_id', '=','9');
-
-        return view('dashboard.kategori.kategori_9',compact('product'));
-    }
-    public function showKategori10()
-    {
-        $product = Products::all()->where('category_id', '=','10');
-
-        return view('dashboard.kategori.kategori_10',compact('product'));
-    }
-    public function showKategori11()
-    {
-        $product = Products::all()->where('category_id', '=','11');
-
-        return view('dashboard.kategori.kategori_11',compact('product'));
+        return view('dashboard.kategori.aksesoris',compact('aksesories'));
     }
 
-    public function showKategori12()
-    {
-        $product = Products::all()->where('category_id', '=','12');
-
-        return view('dashboard.kategori.kategori_12',compact('product'));
-    }
 
     public function showProducts()
     {

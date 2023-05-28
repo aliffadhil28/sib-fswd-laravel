@@ -21,8 +21,9 @@
             <input class="form-control" type="text" name="name" id="name" value="{{ $data['name'] }}">
             <div class="row g-2">
                 <div class="col">
-                    <label for="">Role</label>
-                    <select class="form-select form-control" aria-label="Default select example" name="role">
+                    <label for="role">Role</label>
+                    <select id="role" class="form-select form-control" aria-label="Default select example"
+                        name="role">
                         <option selected><b>--Pilih Role--</b></option>
                         <option value="admin">Admin</option>
                         <option value="staff">Staff</option>
