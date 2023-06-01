@@ -1,51 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.master')
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Scrolling Nav - Start Bootstrap Template</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('css/landing.css') }}" rel="stylesheet" />
-</head>
+@section('title', 'Loak Station')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+@endsection
+@section('content')
+    <header class="bg-gradient text-white px-5">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <img class="h-50 d-inline-block w-100 rounded-5"
+                        src="https://images.unsplash.com/photo-1598514982901-ae62764ae75e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                        alt="first_image">
 
-<body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <div class="container px-4">
-            <a class="navbar-brand" href="#page-top">Arkatama Store</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
-                    class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#product">Product</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
+                </div>
+                <div class="carousel-item active">
+                    <img class="h-50 d-inline-block w-100 rounded-5"
+                        src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                        alt="first_image">
+
+                </div>
+                <div class="carousel-item">
+                    <img class="h-50 d-inline-block w-100 rounded-5"
+                        src="https://images.unsplash.com/photo-1598511756348-640384c52ada?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                        alt="first_image">
+
+                </div>
             </div>
-        </div>
-    </nav>
-    <!-- Header-->
-    <header class="bg-primary bg-gradient text-white">
-        <div class="container px-4 text-center">
-            <h1 class="fw-bolder">Welcome to Arkatama Store</h1>
-            <p class="lead">Temukan yang anda butuhkan dan checkout !!!</p>
-            <a class="btn btn-lg btn-light" href="#about">Start shopping!</a>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </header>
     <!-- About section-->
     <section id="product">
         <div class="container px-4">
-            <div class="row gx-4 justify-content-center">
+            <div class="row row-cols-2 row-cols-md-4">
                 @foreach ($products as $produk)
-                    <div class="col-sm-8 mt-3">
-                        <h2>{{ $produk['name'] }}</h2>
-                        <p class="lead">{{ $produk['description'] }}</p>
-                        <h5>Rp. {{ $produk['price'] }}</h4>
+                    <div class="col">
+                        <div class="card mb-4">
+                            <img src="{{ asset('storage/products/' . $produk->img) }}" class="card-img-top w-auto h-50"
+                                alt="...">
+                            <div class="card-body">
+                                <h2 class="card-title text-truncate">{{ $produk->name }}</h2>
+                                <h6 class="card-subtitle my-1">{{ $produk->categories_name }}</h6>
+                                <p>Rp. {{ $produk->price }}</p>
+                                <p class="card-text text-truncate">{{ $produk->description }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="/detail/{{ $produk->id }}" class="btn btn-primary">See More</a>
+                                    <p class="align-items-center">Amount : {{ $produk->qty }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -80,16 +93,4 @@
             </div>
         </div>
     </section>
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container px-4">
-            <p class="m-0 text-center text-white">Copyright &copy; Arkatama Store 2023</p>
-        </div>
-    </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="{{ asset('js/landing.js') }}"></script>
-</body>
-
-</html>
+@endsection

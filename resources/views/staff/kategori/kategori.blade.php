@@ -1,26 +1,24 @@
 @extends('layout.master_dashboard')
 
-@section('title', 'Daftar Pembeli')
+@section('title', 'Daftar Produk')
 
 @section('content')
     <div class="container-fluid px-4">
-        <h1>Group Users</h1>
-
-        <h3 class="my-4">Penjual</h3>
+        <div class="d-flex flex-row justify-content-between">
+            <h1>Daftar Kategori</h1>
+            <a class="btn btn-primary my-3" href="slider/create">Tambah Kategori</a>
+        </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Users
+                Categories
             </div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th>Action</th>
                             <th>Name</th>
-                            <th>Avatar</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Address</th>
                         </tr>
                     </thead>
                     {{-- <tfoot>
@@ -34,14 +32,12 @@
                     </tr>
                 </tfoot> --}}
                     <tbody>
-                        @foreach ($pembeli as $user)
+                        @foreach ($data as $d)
                             <tr>
-                                <td>{{ $user['name'] }}</td>
-                                <td><img class="w-25 rounded" src="/storage/avatar/{{ $user['avatar'] }}" alt="profil-users">
+                                <td>
+                                    <a class="btn btn-primary" href="{{ route('categories.show', $d->id) }}">Detail</a>
                                 </td>
-                                <td>{{ $user['email'] }}</td>
-                                <td>{{ $user['role'] }}</td>
-                                <td>{{ $user['address'] }}</td>
+                                <td>{{ $d->name }}</td>
                             </tr>
                         @endforeach
                     </tbody>

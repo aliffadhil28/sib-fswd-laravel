@@ -39,28 +39,7 @@
                         @foreach ($data as $d)
                             <tr>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-warning dropdown-toggle" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('slider.edit', $d->id) }}">Edit</a>
-                                            </li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('slider.show', $d->id) }}">Detail</a></li>
-                                            <li>
-                                                <form class='mt-2' onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('slider.destroy', $d->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type='submit' class='btn btn-danger'>
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <a class="btn btn-primary" href="{{ route('staff.showSlider', $d->id) }}">Detail</a>
                                 </td>
                                 <td>{{ $d->name }}</td>
                                 <td>{{ $d->text }}</td>

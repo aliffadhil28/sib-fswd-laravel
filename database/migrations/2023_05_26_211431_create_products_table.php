@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('condition_scale');
             $table->integer('qty');
             $table->string('year');
+            $table->boolean('is_best')->default(0);
             $table->enum('status',['accepted','waiting','rejected'])->default('waiting');
             $table->foreignId('created_by')->nullable()->constrained(table: 'users',indexName: 'products_created_by');
             $table->foreignId('verified_by')->nullable()->constrained(table: 'users',indexName: 'products_verified_by');

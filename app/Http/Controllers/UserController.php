@@ -14,27 +14,27 @@ class UserController extends Controller
     {
         $data = User::all();
 
-        return view('user.user')->with('data', $data);
+        return view('dashboard.user.user')->with('data', $data);
     }
 
     public function getUser(){
         $user = User::all();
-        return view('user.user')->with('user', $user);
+        return view('dashboard.user.user')->with('user', $user);
     }
 
     public function create()
     {
-        return view('user.create');
+        return view('dashboard.user.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'avatar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'avatar' => 'required|image|mimes:jpg,jpeg,png',
             'name' => 'required',
             'address' => 'required',
             'role' => 'required',
-            'phone' => 'required',
+            // 'phone' => 'required',
             'password' => 'required',
             'email' => 'required',
         ]);
@@ -43,12 +43,12 @@ class UserController extends Controller
         $avatar->storeAs('public/avatar',$avatar->hashName());
 
         User::create([
-            'avatar' => $avatar->hashName(),
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
+            // 'phone' => $request->phone,
             'address' => $request->address,
             'password' => $request->password,
+            'avatar' => $avatar->hashName(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -60,7 +60,7 @@ class UserController extends Controller
     {
         $data = User::find($id);
 
-        return view('user.show')->with('data', $data);
+        return view('dashboard.user.show')->with('data', $data);
     }
     public function edit(string $id): View
     {
@@ -72,7 +72,7 @@ class UserController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
-            'avatar' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'avatar' => 'image|mimes:jpg,jpeg,png',
             // 'name' => 'required',
             // 'address' => 'required',
             // 'role' => 'required',
@@ -90,13 +90,12 @@ class UserController extends Controller
             Storage::delete('public/avatar/'.$user->avatar);
 
             $user->update([
-                'avatar' => $avatar->hashName(),
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'password' => $request->password,
-                // 'created_at' => now(),
+                'avatar' => $avatar->hashName(),
                 'updated_at' => now(),
             ]);
         }else{
@@ -107,7 +106,6 @@ class UserController extends Controller
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'password' => $request->password,
-                // 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
@@ -120,7 +118,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         //delete image
-        Storage::delete('public/storage/avatar/'. $user->image);
+        Storage::delete('public/avatar/'. $user->avatar);
 
         //delete post
         $user->delete();

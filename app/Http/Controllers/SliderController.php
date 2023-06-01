@@ -30,7 +30,7 @@ class SliderController extends Controller
         ]);
 
         $avatar = $request->file('image');
-        $avatar->storeAs('public/image',$avatar->hashName());
+        $avatar->storeAs('public/sliders',$avatar->hashName());
 
         Slider::create([
             'image' => $avatar->hashName(),
@@ -64,9 +64,9 @@ class SliderController extends Controller
 
         if ($request->hasFile('image')) {
             $avatar = $request->file('image');
-            $avatar->storeAs('public/image',$avatar->hashName());
+            $avatar->storeAs('public/sliders',$avatar->hashName());
 
-            Storage::delete('public/image/'.$slider->avatar);
+            Storage::delete('public/sliders/'.$slider->avatar);
 
             $slider->update([
                 'image' => $avatar->hashName(),
@@ -91,7 +91,9 @@ class SliderController extends Controller
     public function destroy($id): RedirectResponse
     {
         //get post by ID
-        Slider::findOrFail($id)->delete();
+        $slider = Slider::findOrFail($id);
+        Storage::delete('public/sliders/'. $slider->image);
+        $slider->delete();
         //redirect to index
         return redirect()->route('slider.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }

@@ -6,7 +6,7 @@
     <div class="container-fluid px-4">
         <div class="d-flex flex-row justify-content-between">
             <h1>Daftar User</h1>
-            <a class="btn btn-primary my-3" href="slider/create">Tambah User</a>
+            <a class="btn btn-primary my-3" href="user/create">Tambah User</a>
         </div>
         <div class="card mb-4">
             <div class="card-header">
@@ -45,13 +45,13 @@
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('slider.edit', $d->id) }}">Edit</a>
+                                            <li><a class="dropdown-item" href="{{ route('user.edit', $d->id) }}">Edit</a>
                                             </li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('slider.show', $d->id) }}">Detail</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('user.show', $d->id) }}">Detail</a>
+                                            </li>
                                             <li>
                                                 <form class='mt-2' onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('slider.destroy', $d->id) }}" method="post">
+                                                    action="{{ route('user.destroy', $d->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type='submit' class='btn btn-danger'>
@@ -64,7 +64,8 @@
                                 </td>
                                 <td>{{ $d->name }}</td>
                                 <td>{{ $d->email }}</td>
-                                <td><img src="/storage/image/{{ $d->avatar }}" alt="slider_image" class="w-25 rounded">
+                                <td><img src="{{ asset('storage/avatar/' . $d->avatar) }}" alt="user-avatar"
+                                        class="w-25 rounded">
                                 </td>
                                 <td>{{ $d->address }}</td>
                                 <td>{{ $d->role }}</td>

@@ -1,6 +1,6 @@
 @extends('layout.master_dashboard')
 
-@section('title', 'Tambah Slider')
+@section('title', 'Edit Slider')
 @section('content')
     <div class="container">
         <h1 class="mt-5">Tambah Slider</h1>

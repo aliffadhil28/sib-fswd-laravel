@@ -27,6 +27,7 @@
                         <option selected><b>--Pilih Role--</b></option>
                         <option value="admin">Admin</option>
                         <option value="staff">Staff</option>
+                        <option value="user">User</option>
                     </select>
                 </div>
                 <div class="col">
@@ -35,18 +36,8 @@
                         value="{{ $data['password'] }}">
                 </div>
             </div>
-            <div class="row g-2">
-                <div class="col">
-                    <label for="email">Email</label>
-                    <input class="form-control" type="email" name="email" id="email"
-                        value="{{ $data['email'] }}">
-                </div>
-                <div class="col">
-                    <label for="phone">Phone</label>
-                    <input class="form-control" type="tel" name="phone" id="phone"
-                        value="{{ $data['phone'] }}">
-                </div>
-            </div>
+            <label for="email">Email</label>
+            <input class="form-control" type="email" name="email" id="email" value="{{ $data['email'] }}">
             <label for="address">Alamat Lengkap</label>
             <textarea class="form-control" name="address" id="address" cols="30" rows="3">{{ $data['address'] }}</textarea>
             <label for="avatar">Avatar</label>

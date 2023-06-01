@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-{{-- <html lang="en"> --}}
+@extends('layout.master_dashboard')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('/css/users/detail.css') }}">
-    <title>Profil</title>
-</head>
-
-<body>
+@section('title', 'Profil User')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/users/detail.css') }}">
+@endsection
+@section('content')
     <div class="page-content page-container" id="page-content">
         <div class="padding">
             <div class="row container d-flex justify-content-center">
@@ -37,10 +30,6 @@
                                             <p class="m-b-10 f-w-600">Email</p>
                                             <h6 class="text-muted f-w-400">{{ $data['email'] }}</h6>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Phone</p>
-                                            <h6 class="text-muted f-w-400">{{ $data['phone'] }}</h6>
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -49,16 +38,16 @@
                                         </div>
                                     </div>
                                     <ul class="social-link list-unstyled m-t-40 m-b-10">
-                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom"
-                                                title="" data-original-title="facebook" data-abc="true"><i
+                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title=""
+                                                data-original-title="facebook" data-abc="true"><i
                                                     class="mdi mdi-facebook feather icon-facebook facebook"
                                                     aria-hidden="true"></i></a></li>
-                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom"
-                                                title="" data-original-title="twitter" data-abc="true"><i
+                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title=""
+                                                data-original-title="twitter" data-abc="true"><i
                                                     class="mdi mdi-twitter feather icon-twitter twitter"
                                                     aria-hidden="true"></i></a></li>
-                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom"
-                                                title="" data-original-title="instagram" data-abc="true"><i
+                                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title=""
+                                                data-original-title="instagram" data-abc="true"><i
                                                     class="mdi mdi-instagram feather icon-instagram instagram"
                                                     aria-hidden="true"></i></a></li>
                                     </ul>
@@ -70,8 +59,10 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <!-- JS -->
+@section('js')
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
@@ -81,6 +72,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
-</body>
-
-</html>
+@endsection
+<!-- JS -->

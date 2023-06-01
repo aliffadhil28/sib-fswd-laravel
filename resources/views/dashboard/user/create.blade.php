@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <h1>Tambah Data User</h1>
-        <form action="add" method="post" enctype="multipart/form-data">
+        <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="name">Nama Lengkap</label>
             <input class="form-control" type="text" name="name" id="name">
@@ -24,6 +24,7 @@
                         <option selected>--Pilih Role--</option>
                         <option value="admin">Admin</option>
                         <option value="staff">Staff</option>
+                        <option value="user">User</option>
                     </select>
                 </div>
                 <div class="col">
@@ -31,15 +32,9 @@
                     <input class="form-control" type="password" name="password" id="name">
                 </div>
             </div>
-            <div class="row g-2">
-                <div class="col">
-                    <label for="email">Email</label>
-                    <input class="form-control" type="email" name="email" id="email">
-                </div>
-                <div class="col">
-                    <label for="phone">Phone</label>
-                    <input class="form-control" type="tel" name="phone" id="phone">
-                </div>
+            <div class="col">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" name="email" id="email">
             </div>
             <label for="address">Alamat Lengkap</label>
             <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>

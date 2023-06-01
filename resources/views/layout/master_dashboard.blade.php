@@ -41,7 +41,7 @@
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -56,7 +56,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
+                        <div class="sb-sidenav-menu-heading">Admin</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
@@ -77,10 +77,10 @@
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link @if (Request::is('admin')) active @endif"
                                             href="/admin">Admin</a>
-                                        <a class="nav-link @if (Request::is('penjual')) active @endif"
-                                            href="/penjual">Penjual</a>
-                                        <a class="nav-link @if (Request::is('pembeli')) active @endif"
-                                            href="/pembeli">Pembeli</a>
+                                        <a class="nav-link @if (Request::is('staff')) active @endif"
+                                            href="/staff">Staff</a>
+                                        <a class="nav-link @if (Request::is('users')) active @endif"
+                                            href="/users">User</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link @if (Request::is('user')) active @endif"
@@ -96,27 +96,36 @@
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseError" aria-expanded="false"
-                                    aria-controls="pagesCollapseError">
-                                    Kategori
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link @if (Request::is('shoes')) active @endif"
-                                            href="/shoes">Shoes</a>
-                                        <a class="nav-link @if (Request::is('items')) active @endif"
-                                            href="/items">Items</a>
-                                        <a class="nav-link @if (Request::is('accessories')) active @endif"
-                                            href="/accessories">Accessories</a>
-                                    </nav>
-                                </div> --}}
-                                <a class="nav-link @if (Request::is('products')) active @endif"
+                                <a class="nav-link @if (Request::is('categories')) active @endif"
                                     href="/categories">Daftar Categories</a>
                                 <a class="nav-link @if (Request::is('products')) active @endif"
                                     href="/produk">Daftar Produk</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#kategori1" aria-expanded="false" aria-controls="kategori1">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
+                            Category
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="kategori1" aria-labelledby="heading2"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link @if (Request::is('categories')) active @endif"
+                                    href="/categories">Daftar Kategori</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#slider1" aria-expanded="false" aria-controls="slider1">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
+                            Slider
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="slider1" aria-labelledby="heading2"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link @if (Request::is('slider')) active @endif"
+                                    href="/slider">Daftar Slider</a>
                             </nav>
                         </div>
                         {{-- <div class="sb-sidenav-menu-heading">Addons</div>
@@ -128,11 +137,81 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Tables
                         </a> --}}
+                        <div class="sb-sidenav-menu-heading">Staff</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#user" aria-expanded="false" aria-controls="user">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                            User
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="user" aria-labelledby="heading1"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
+                                    aria-controls="pagesCollapseAuth">
+                                    Grup User
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="heading1"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link @if (Request::is('admin')) active @endif"
+                                            href="/staff/admin">Admin</a>
+                                        <a class="nav-link @if (Request::is('staff')) active @endif"
+                                            href="/staff/staff">Staff</a>
+                                        <a class="nav-link @if (Request::is('users')) active @endif"
+                                            href="/staff/users">User</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link @if (Request::is('user')) active @endif"
+                                    href="/staff/user">Daftar User</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#products" aria-expanded="false" aria-controls="products">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
+                            Products
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="products" aria-labelledby="heading2"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link @if (Request::is('produk')) active @endif"
+                                    href="/staff/produk">Daftar Produk</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#kategori" aria-expanded="false" aria-controls="kategori">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
+                            Category
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="kategori" aria-labelledby="heading2"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link @if (Request::is('kategori')) active @endif"
+                                    href="/staff/kategori">Daftar Kategori</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#slider" aria-expanded="false" aria-controls="slider">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
+                            Slider
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="slider" aria-labelledby="heading2"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link @if (Request::is('slider')) active @endif"
+                                    href="/staff/slider">Daftar Slider</a>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    {{ auth()->user()->name }}
                 </div>
             </nav>
         </div>

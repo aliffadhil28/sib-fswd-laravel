@@ -40,7 +40,7 @@ class ProductController extends Controller
         ]);
 
         $avatar = $request->file('img');
-        $avatar->storeAs('public/img',$avatar->hashName());
+        $avatar->storeAs('public/products',$avatar->hashName());
 
         Products::create([
             'img' => $avatar->hashName(),
@@ -62,8 +62,9 @@ class ProductController extends Controller
     public function show(string $id): View
     {
         $data = Products::find($id);
+        $cat = DB::table('categories')->where('categories.id', $data->categories_id)->first();
 
-        return view('dashboard.produk.detail')->with('data', $data);
+        return view('dashboard.produk.detail',compact('data','cat'));
     }
     public function edit(string $id): View
     {
@@ -89,9 +90,9 @@ class ProductController extends Controller
 
         if ($request->hasFile('img')) {
             $avatar = $request->file('img');
-            $avatar->storeAs('public/img',$avatar->hashName());
+            $avatar->storeAs('public/products',$avatar->hashName());
 
-            Storage::delete('public/img/'.$products->avatar);
+            Storage::delete('public/products/'.$products->avatar);
 
             $products->update([
                 'img' => $avatar->hashName(),
@@ -129,7 +130,7 @@ class ProductController extends Controller
         $products = Products::findOrFail($id);
 
         //delete image
-        Storage::delete('public/storage/avatar/'. $products->image);
+        Storage::delete('public/products/'. $products->img);
 
         //delete post
         $products->delete();

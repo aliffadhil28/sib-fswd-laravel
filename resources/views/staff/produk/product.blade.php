@@ -46,28 +46,7 @@
                         @foreach ($data as $d)
                             <tr>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-warning dropdown-toggle" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('produk.edit', $d->id) }}">Edit</a>
-                                            </li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('produk.show', $d->id) }}">Detail</a></li>
-                                            <li>
-                                                <form class='mt2' onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('produk.destroy', $d->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type='submit' class='btn btn-danger'>
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <a class="btn btn-primary" href="{{ route('staff.showProduct', $d->id) }}">Detail</a>
                                 </td>
                                 <td>{{ $d->categories_name }}</td>
                                 <td>{{ $d->name }}</td>

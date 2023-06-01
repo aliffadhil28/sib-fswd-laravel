@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $products = Products::paginate(3);
-        return view('landing',compact('products'));
+        if (Auth::check()) {
+            $products = DB::table('products')
+            ->join('categories','products.categories_id','=','categories.id')
+            ->select('products.*','categories.name as categories_name')->get();
+            return view('landing',compact('products'));
+        }
+        return redirect()->route('login')->with(['message'=>'Please Login to Access Dashboard']);
     }
 
     public function showDashboard()
@@ -27,17 +35,17 @@ class HomeController extends Controller
         return view('dashboard.admin',compact('admin'));
     }
 
-    public function showPenjual()
+    public function showStaff()
     {
-        $penjual = User::all()->where('role', '=','penjual');
+        $staff = User::all()->where('role', '=','staff');
 
-        return view('dashboard.penjual',compact('penjual'));
+        return view('dashboard.staff',compact('staff'));
     }
-    public function showPembeli()
+    public function showUser()
     {
-        $pembeli = User::all()->where('role', '=','pembeli');
+        $users = User::all()->where('role', '=','user');
 
-        return view('dashboard.pembeli',compact('pembeli'));
+        return view('dashboard.users',compact('users'));
     }
     public function showUsers()
     {
@@ -46,29 +54,17 @@ class HomeController extends Controller
         return view('dashboard.users',compact('users'));
     }
 
-    public function showShoes()
-    {
-        $sepatu = Products::all()->where('categories_id', '=','1');
-
-        return view('dashboard.kategori.sepatu',compact('sepatu'));
-    }
-    public function showItems()
-    {
-        $items = Products::all()->where('categories_id', '=','3');
-
-        return view('dashboard.kategori.items',compact('items'));
-    }
-    public function showAccessories()
-    {
-        $aksesories = Products::all()->where('categories_id', '=','2');
-
-        return view('dashboard.kategori.aksesoris',compact('aksesories'));
-    }
-
-
     public function showProducts()
     {
-        $product = Products::all();
+        $product = DB::table('products')
+        ->join('categories','products.categories_id','=','categories.id')
+        ->select('products.*','categories.name as categories_name')->get();
         return view('dashboard.produk',compact('product'));
+    }
+
+    public function detailProducts(string $id)
+    {
+        $data = Categories::find($id);
+        return view('detail',compact('data'));
     }
 }

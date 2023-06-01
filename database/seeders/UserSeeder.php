@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // User::factory()->count(10)->create();
         DB::table('users')->insert([
             [
                 'id' => 1,
@@ -35,7 +36,7 @@ class UserSeeder extends Seeder
                 'avatar' => 'pembeli.jpg',
                 'address' => 'Jl. Pembeli',
                 'email' => 'pembeli@example.com',
-                'role' => 'pembeli',
+                'role' => 'staff',
                 'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
@@ -47,7 +48,7 @@ class UserSeeder extends Seeder
                 'avatar' => 'penjual.jpg',
                 'address' => 'Jl. Penjual',
                 'email' => 'penjual@example.com',
-                'role' => 'penjual',
+                'role' => 'user',
                 'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),
                 'created_at' => now(),

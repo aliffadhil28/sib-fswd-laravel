@@ -4,8 +4,8 @@
 @section('content')
     <div class="container">
         <h1 class="mt-5">Tambah Kategori</h1>
-        <form action="{{ route('categories.store') }}" method="post" enctype="multipart/form-data">
-            {{-- @method('put') --}}
+        <form action="{{ route('categories.update', $data->id) }}" method="post" enctype="multipart/form-data">
+            @method('put')
             @csrf
             <label for="name">Name</label>
             <input class="form-control" type="text" name="name" id="name" value="{{ $data->name }}">
