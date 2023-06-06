@@ -3,16 +3,26 @@
 @section('title', 'Tambah Produk')
 @section('content')
     <div class="container">
-        <h1 class="mt-5">Tambah Data Product</h1>
+        <h1 class="my-4">Tambah Data Product</h1>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('produk.store') }}" method="post" enctype="multipart/form-data">
             {{-- @method('put') --}}
             @csrf
+            <input class="form-control" type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <label for="name">Name</label>
             <input class="form-control" type="text" name="name" id="name">
             <div class="row g-2">
                 <div class="col">
                     <label for="price">Price</label>
-                    <input class="form-control" type="text" name="price" id="price">
+                    <input class="form-control" type="number" name="price" id="price">
                 </div>
                 <div class="col">
                     <label for="qty">Quantity</label>

@@ -4,13 +4,18 @@
 @section('content')
     <div class="container">
         <h1 class="mt-5">Tambah Slider</h1>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <form action="{{ route('slider.update', $data->id) }}" method="post" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="row g-2">
                 <div class="col">
-                    <label for="name">Name</label>
-                    <input class="form-control" type="text" name="name" id="name" value="{{ $data->name }}">
+                    <label for="title">Title</label>
+                    <input class="form-control" type="text" name="title" id="title" value="{{ $data->title }}">
                 </div>
                 <div class="col">
                     <label for="url">URL</label>

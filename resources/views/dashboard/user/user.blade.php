@@ -4,6 +4,11 @@
 
 @section('content')
     <div class="container-fluid px-4">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="d-flex flex-row justify-content-between">
             <h1>Daftar User</h1>
             <a class="btn btn-primary my-3" href="user/create">Tambah User</a>
@@ -45,27 +50,35 @@
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('user.edit', $d->id) }}">Edit</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="{{ route('user.show', $d->id) }}">Detail</a>
-                                            </li>
-                                            <li>
-                                                <form class='mt-2' onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('user.destroy', $d->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type='submit' class='btn btn-danger'>
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </li>
+                                            @if (auth()->user()->role == 'admin')
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('user.edit', $d->id) }}">Edit</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('user.show', $d->id) }}">Detail</a>
+                                                </li>
+                                                <li>
+                                                    <form class='mt-2' onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                        action="{{ route('user.destroy', $d->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type='submit' class='btn btn-danger'>
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('user.show', $d->id) }}">Detail</a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
                                 <td>{{ $d->name }}</td>
                                 <td>{{ $d->email }}</td>
                                 <td><img src="{{ asset('storage/avatar/' . $d->avatar) }}" alt="user-avatar"
-                                        class="w-25 rounded">
+                                        class="w-75 rounded">
                                 </td>
                                 <td>{{ $d->address }}</td>
                                 <td>{{ $d->role }}</td>

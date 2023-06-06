@@ -3,17 +3,27 @@
 @section('title', 'Tambah Produk')
 @section('content')
     <div class="container">
-        <h1>Update Data Product</h1>
+        <h1 class="my-4">Update Data Product</h1>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('produk.update', $data->id) }}" method="post" enctype="multipart/form-data">
             @method('put')
             @csrf
             <input type="hidden" name="id" value="{{ $data['id'] }}">
+            <input class="form-control" type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <label for="name">Name</label>
             <input class="form-control" type="text" name="name" id="name" value="{{ $data['name'] }}">
             <div class="row g-2">
                 <div class="col">
                     <label for="price">Price</label>
-                    <input class="form-control" type="text" name="price" id="price" value="{{ $data['price'] }}">
+                    <input class="form-control" type="number" name="price" id="price" value="{{ $data['price'] }}">
                 </div>
                 <div class="col">
                     <label for="qty">Quantity</label>
@@ -51,7 +61,16 @@
                         <option selected><b>--Pilih Status--</b></option>
                         <option value="waiting">Waiting</option>
                         <option value="rejected">Rejected</option>
-                        <option value="accepeted">Accepeted</option>
+                        <option value="accepted">Accepted</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="is_best">Best Product</label>
+                    <select id="is_best" class="form-select form-control" aria-label="Default select example"
+                        name="is_best" val>
+                        <option selected><b>--Pilih Status--</b></option>
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
                     </select>
                 </div>
             </div>

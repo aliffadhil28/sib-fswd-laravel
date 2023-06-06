@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -23,9 +24,13 @@ class CategoryController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $this->validate($request, [
+        $validator= Validator::make($request->all(), [
             'name' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         Categories::create([
             'name' => $request->name,
@@ -54,9 +59,13 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
-        $this->validate($request, [
+        $validator= Validator::make($request->all(), [
             'name' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $products = Categories::findOrFail($id);
 

@@ -30,7 +30,9 @@ class LoginRegisterController extends Controller
 
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard')->withSuccess('Anda Berhasil Masuk');
+            return redirect()->route('dashboard')->with(['success' => 'Selamat Datang di LocalGems']);;
+        }else{
+            return redirect()->back();
         }
     }
 
@@ -61,7 +63,7 @@ class LoginRegisterController extends Controller
         Auth::attempt($data);
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard')->with('message','Selamat datang');
+        return redirect()->route('dashboard')->with(['success' => 'Selamat Datang di LocalGems']);
     }
 
     public function logout(Request $request)

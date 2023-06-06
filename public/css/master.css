@@ -82,7 +82,7 @@
     --bs-border-radius-2xl: 2rem;
     --bs-border-radius-pill: 50rem;
     --bs-link-color: #0d6efd;
-    --bs-link-hover-color: #0a58ca;
+    --bs-link-hover-color: #09757a;
     --bs-code-color: #d63384;
     --bs-highlight-bg: #fff3cd;
 }
@@ -101,6 +101,7 @@
 
 body {
     margin: 0;
+    /* padding-top: 115px; */
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
@@ -3868,12 +3869,12 @@ fieldset:disabled .btn {
     --bs-navbar-padding-x: 0;
     --bs-navbar-padding-y: 0.5rem;
     --bs-navbar-color: rgba(0, 0, 0, 0.55);
-    --bs-navbar-hover-color: rgba(0, 0, 0, 0.7);
+    --bs-navbar-hover-color: #09757a;
     --bs-navbar-disabled-color: rgba(0, 0, 0, 0.3);
-    --bs-navbar-active-color: rgba(0, 0, 0, 0.9);
+    --bs-navbar-active-color: #09757a;
     --bs-navbar-brand-padding-y: 0.3125rem;
     --bs-navbar-brand-margin-end: 1rem;
-    --bs-navbar-brand-font-size: 1.25rem;
+    --bs-navbar-brand-font-size: 2rem;
     --bs-navbar-brand-color: rgba(0, 0, 0, 0.9);
     --bs-navbar-brand-hover-color: rgba(0, 0, 0, 0.9);
     --bs-navbar-nav-link-padding-x: 0.5rem;
@@ -11191,10 +11192,10 @@ html {
     scroll-padding-top: 3.5rem;
 }
 
-header {
+/* header {
     padding-top: 9.5rem;
     padding-bottom: 6rem;
-}
+} */
 
 section {
     padding-top: 9rem;
@@ -11212,9 +11213,14 @@ section {
 } */
 
 .card-img-top {
-    object-fit: none; /* Do not scale the image */
+    object-fit: contain; /* Do not scale the image */
     object-position: center; /* Center the image within the element */
     width: 100%;
-    max-height: 150px;
+    max-height: 200px;
     margin-bottom: 1rem;
+}
+
+#img-nav {
+    max-width: 30px;
+    height: auto;
 }

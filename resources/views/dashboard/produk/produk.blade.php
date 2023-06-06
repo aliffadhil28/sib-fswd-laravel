@@ -4,6 +4,11 @@
 
 @section('content')
     <div class="container-fluid px-4">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="d-flex flex-row justify-content-between">
             <h1>Daftar Produk</h1>
             <a class="btn btn-primary my-3" href="produk/create">Tambah Produk</a>
@@ -25,6 +30,7 @@
                             <th>Condition (%)</th>
                             <th>Quantity</th>
                             <th>Year</th>
+                            <th>Best Seller</th>
                             <th>Image</th>
                             <th>Status</th>
                             <th>Created By</th>
@@ -52,20 +58,28 @@
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('produk.edit', $d->id) }}">Edit</a>
-                                            </li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('produk.show', $d->id) }}">Detail</a></li>
-                                            <li>
-                                                <form class='mt2' onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('produk.destroy', $d->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type='submit' class='btn btn-danger'>
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </li>
+                                            @if (auth()->user()->role == 'admin')
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('produk.edit', $d->id) }}">Edit</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('produk.show', $d->id) }}">Detail</a></li>
+                                                <li>
+                                                    <form class='mt2' onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                        action="{{ route('produk.destroy', $d->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type='submit' class='btn btn-danger'>
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('produk.show', $d->id) }}">Detail</a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
@@ -76,6 +90,13 @@
                                 <td>{{ $d->condition_scale }}</td>
                                 <td>{{ $d->qty }}</td>
                                 <td>{{ $d->year }}</td>
+                                <td>
+                                    @if ($d->is_best == 0)
+                                        No
+                                    @else
+                                        Yes
+                                    @endif
+                                </td>
                                 <td><img src="{{ asset('storage/products/' . $d->img) }}" class="w-100 rounded"
                                         alt="product-images">
                                 </td>

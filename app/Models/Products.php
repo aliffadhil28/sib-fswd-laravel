@@ -17,9 +17,11 @@ class Products extends Model
         'condition_scale',
         'qty',
         'year',
+        'is_best',
         'status',
         'created_by',
         'verified_by',
+        'verified_at',
         // 'created_by',
     ];
 

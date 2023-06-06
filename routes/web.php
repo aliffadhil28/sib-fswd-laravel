@@ -6,7 +6,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,21 +30,26 @@ Route::middleware('admin')->group(function (){
     Route::get('/users',[HomeController::class, 'showUser'])->name('user');
     Route::get('/dashboard',[HomeController::class, 'showDashboard']);
 });
-Route::get('/',[HomeController::class, 'index'])->name('dashboard');
 Route::middleware('staff')->group(function(){
-    Route::get('/staff/kategori/{id}',[StaffController::class, 'showCategory'])->name('staff.showKategori');
-    Route::get('/staff/kategori',[StaffController::class, 'getCategory'])->name('staff.kategori');
-    Route::get('/staff/slider/{id}',[StaffController::class, 'showSlider'])->name('staff.showSlider');
-    Route::get('/staff/slider',[StaffController::class, 'getSlider'])->name('staff.slider');
-    Route::get('/staff/produk',[StaffController::class, 'getProducts'])->name('staff.product');
-    Route::get('/staff/produk/{id}',[StaffController::class, 'showProducts'])->name('staff.showProduct');
-    Route::get('/staff/staff',[StaffController::class, 'getStaff'])->name('staff.staff');
-    Route::get('/staff/users',[StaffController::class, 'getUser'])->name('staff.user');
-    Route::get('/staff/admin',[StaffController::class, 'getAdmin'])->name('staff.admin');
-    Route::get('/staff/user',[StaffController::class, 'getAllUsers'])->name('staff.allUsers');
-    Route::get('/staff/user/{id}',[StaffController::class, 'showUsers'])->name('staff.showUsers');
+    Route::get('/dashboard',[HomeController::class, 'showDashboard']);
+    Route::get('/user/create',[UserController::class, 'create']);
+    Route::get('/user',[UserController::class, 'index'])->name('user.index');
+    Route::get('/user/{id}',[UserController::class, 'show']);
+    Route::get('/categories/create',[CategoryController::class, 'create']);
+    Route::get('/categories',[CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/{id}',[CategoryController::class, 'show']);
+    Route::get('/produk/create',[ProductController::class, 'create']);
+    Route::get('/produk',[ProductController::class, 'index'])->name('produk.index');
+    Route::get('/produk/{id}',[ProductController::class, 'show']);
+    Route::get('/slider/create',[SliderController::class, 'create']);
+    Route::get('/slider',[SliderController::class, 'index'])->name('slider.index');
+    Route::get('/slider/{id}',[SliderController::class, 'show']);
 });
+Route::get('/',[HomeController::class, 'index'])->name('dashboard');
 Route::get('/products/{id}',[HomeController::class, 'detailProducts'])->name('product.detail')->middleware('auth');
+Route::get('/products',[HomeController::class, 'getProducts'])->name('user.products');
+Route::get('/search',[HomeController::class, 'search'])->name('search');
+Route::get('/price',[HomeController::class, 'price'])->name('price');
 Route::get('/login',[LoginRegisterController::class, 'login'])->name('login');
 Route::get('/register',[LoginRegisterController::class, 'register'])->name('register');
 Route::get('/logout',[LoginRegisterController::class, 'logout']);

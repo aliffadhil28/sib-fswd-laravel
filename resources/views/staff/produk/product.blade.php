@@ -6,7 +6,7 @@
     <div class="container-fluid px-4">
         <div class="d-flex flex-row justify-content-between">
             <h1>Daftar Produk</h1>
-            <a class="btn btn-primary my-3" href="produk/create">Tambah Produk</a>
+            <a class="btn btn-primary my-3" href="/produk/create">Tambah Produk</a>
         </div>
         <div class="card mb-4">
             <div class="card-header">
@@ -25,6 +25,7 @@
                             <th>Condition (%)</th>
                             <th>Quantity</th>
                             <th>Year</th>
+                            <th>Best Seller</th>
                             <th>Image</th>
                             <th>Status</th>
                             <th>Created By</th>
@@ -55,6 +56,13 @@
                                 <td>{{ $d->condition_scale }}</td>
                                 <td>{{ $d->qty }}</td>
                                 <td>{{ $d->year }}</td>
+                                <td>
+                                    @if ($d->is_best == 0)
+                                        No
+                                    @else
+                                        Yes
+                                    @endif
+                                </td>
                                 <td><img src="{{ asset('storage/products/' . $d->img) }}" class="w-100 rounded"
                                         alt="product-images">
                                 </td>

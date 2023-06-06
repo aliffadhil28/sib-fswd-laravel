@@ -1,28 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\DataResource;
 use App\Models\Slider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\View\View;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SliderController extends Controller
 {
-    public function index(){
-        $data = Slider::all();
-        return view('dashboard.slider.index')->with('data', $data);
-    }
-
-    public function create()
+    public function index()
     {
-        return view('dashboard.slider.create');
+        $data = Slider::all();
+        return new DataResource(true,'Data berhasil diambil',$data);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function show($id)
+    {
+        $data = Slider::find($id);
+        return new DataResource(true,'Data berhasil dilihat',$data);
+    }
+
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpg,jpeg,png',
@@ -31,13 +32,13 @@ class SliderController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json($validator->errors(),422);
         }
 
         $avatar = $request->file('image');
         $avatar->storeAs('public/sliders',$avatar->hashName());
 
-        Slider::create([
+        $data = Slider::create([
             'image' => $avatar->hashName(),
             'title' => $request->title,
             'url' => $request->url,
@@ -47,23 +48,10 @@ class SliderController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('slider.index')->with(['success' => 'Data Berhasil Ditambahkan!']);
+        return new DataResource(true,'Data berhasil ditambahkan',$data);
     }
 
-    public function show(string $id): View
-    {
-        $data = Slider::all();
-
-        return view('dashboard.slider.show')->with('data', $data);
-    }
-    public function edit(string $id): View
-    {
-        $data = Slider::findOrFail($id);
-
-        return view('dashboard.slider.edit',compact('data'));
-    }
-
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request,$id)
     {
         $slider = Slider::findOrFail($id);
 
@@ -90,16 +78,17 @@ class SliderController extends Controller
                 'updated_at' => now(),
             ]);
         }
-        return redirect()->route('slider.index')->with(['success' => 'Data Berhasil Diupdate!']);
+
+        return new DataResource(true,'Data berhasil diubah',$slider);
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy($id)
     {
         //get post by ID
         $slider = Slider::findOrFail($id);
         Storage::delete('public/sliders/'. $slider->image);
         $slider->delete();
         //redirect to index
-        return redirect()->route('slider.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return new DataResource(true,'Data berhasil dihapus',null);
     }
 }

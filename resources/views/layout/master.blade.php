@@ -6,31 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>@yield('title'){{ config('LoakStation | Landing Page') }}</title>
+    <title>@yield('title'){{ config('LoakStation') }}</title>
+    <link rel="icon" type="x-icon" href="{{ asset('favicon-32x32.png') }}">
     @yield('style')
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('css/landing.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/master.css') }}" rel="stylesheet" />
 </head>
 
 <body id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-white bg-white fixed-top shadow" id="mainNav">
         <div class="container px-4">
-            <a class="navbar-brand" href="#page-top @if (Request::is('/')) active @endif">LocalGems</a>
+            <img id="img-nav" src="{{ asset('image/icon_png.png') }}" alt="Local Gems Logo" class="w-25 h-auto mr-3">
+            <a class="navbar-brand fw-bold" style="color: #09757a" href="/">LocalGems</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link @if (Request::is('product')) active @endif"
-                            href="#product">Best Seller</a></li>
-                    <li class="nav-item"><a class="nav-link @if (Request::is('services')) active @endif"
-                            href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#best-seller">Best Seller</a></li>
+                    <li class="nav-item"><a class="nav-link @if (Request::is('products')) active @endif"
+                            href="/products">Products</a></li>
                     <li class="nav-item"><a class="nav-link @if (Request::is('contact')) active @endif"
                             href="#contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link @if (Request::is('contact')) active @endif"
-                            href="/logout">Logout</a></li>
+                    <li class="nav-item mx-1">
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle text-white" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false" style="background-color : #09757a">
+                                {{ auth()->user()->name }}
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/profil">Profil</a></li>
+                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -38,7 +50,7 @@
     <!-- Header-->
     @yield('content')
     <!-- Footer-->
-    <footer class="py-5 bg-dark">
+    <footer class="py-5" style="background-color: #09757a">
         <div class="container px-4">
             <p class="m-0 text-center text-white">Copyright &copy; LocalGems 2023</p>
         </div>

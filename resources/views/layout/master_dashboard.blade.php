@@ -8,6 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@yield('title') {{ config('LoakStation') }}</title>
+    <link rel="icon" type="x-icon" href="{{ asset('favicon-32x32.png') }}">
     @yield('style')
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="{{ asset('css/dashboard/index.css') }}" rel="stylesheet" />
@@ -15,9 +16,9 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #09757a">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="#">Arkatama Store Admin</a>
+        <a class="navbar-brand ps-3" href="#">LocalGems Admin</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -48,7 +49,7 @@
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #09757a">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
@@ -56,7 +57,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <div class="sb-sidenav-menu-heading">Admin</div>
+                        <div class="sb-sidenav-menu-heading">Data</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
@@ -137,80 +138,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Tables
                         </a> --}}
-                        <div class="sb-sidenav-menu-heading">Staff</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#user" aria-expanded="false" aria-controls="user">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                            User
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="user" aria-labelledby="heading1"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                    Grup User
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="heading1"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link @if (Request::is('admin')) active @endif"
-                                            href="/staff/admin">Admin</a>
-                                        <a class="nav-link @if (Request::is('staff')) active @endif"
-                                            href="/staff/staff">Staff</a>
-                                        <a class="nav-link @if (Request::is('users')) active @endif"
-                                            href="/staff/users">User</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link @if (Request::is('user')) active @endif"
-                                    href="/staff/user">Daftar User</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#products" aria-expanded="false" aria-controls="products">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
-                            Products
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="products" aria-labelledby="heading2"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link @if (Request::is('produk')) active @endif"
-                                    href="/staff/produk">Daftar Produk</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#kategori" aria-expanded="false" aria-controls="kategori">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
-                            Category
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="kategori" aria-labelledby="heading2"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link @if (Request::is('kategori')) active @endif"
-                                    href="/staff/kategori">Daftar Kategori</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#slider" aria-expanded="false" aria-controls="slider">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tag"></i></div>
-                            Slider
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="slider" aria-labelledby="heading2"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link @if (Request::is('slider')) active @endif"
-                                    href="/staff/slider">Daftar Slider</a>
-                            </nav>
-                        </div>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
+                <div class="sb-sidenav-footer text-white" style="background-color: #09757a">
+                    <div class="small fw-bold">Logged in as:</div>
                     {{ auth()->user()->name }}
                 </div>
             </nav>
@@ -219,10 +150,10 @@
             <main>
                 @yield('content')
             </main>
-            <footer class="py-4 bg-light mt-auto">
+            <footer class="py-4 mt-auto " style="background-color: #09757a">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Arkatama Store 2023</div>
+                        <div class="text-white fw-bold">Copyright &copy; LocalGems 2023</div>
                         <div>
                             <a href="#">Privacy Policy</a>
                             &middot;

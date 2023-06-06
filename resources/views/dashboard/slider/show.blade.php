@@ -17,7 +17,7 @@
             <div class="carousel-item active">
                 <img src="/storage/image/{{ $data['image'] }}" class="d-block w-100" alt="Slider Image" />
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>{{ $data['name'] }}</h5>
+                    <h5>{{ $data['title'] }}</h5>
                     <p>{{ $data['text'] }}.</p>
                 </div>
             </div>

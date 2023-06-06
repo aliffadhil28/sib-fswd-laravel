@@ -4,12 +4,21 @@
 @section('content')
     <div class="container">
         <h1 class="mt-5">Tambah Slider</h1>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('slider.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row g-2">
                 <div class="col">
-                    <label for="name">Name</label>
-                    <input class="form-control" type="text" name="name" id="name">
+                    <label for="title">Title</label>
+                    <input class="form-control" type="text" name="title" id="title">
                 </div>
                 <div class="col">
                     <label for="url">URL</label>

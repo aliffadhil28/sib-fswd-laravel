@@ -4,6 +4,16 @@
 
 @section('content')
     <div class="container-fluid px-4">
+        @if (session('success'))
+            <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ session('success') }}
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
         <div class="d-flex flex-row justify-content-between">
             <h1>Daftar Slider</h1>
             <a class="btn btn-primary my-3" href="slider/create">Tambah Slider</a>
@@ -18,7 +28,7 @@
                     <thead>
                         <tr>
                             <th>Action</th>
-                            <th>Name</th>
+                            <th>Title</th>
                             <th>Text</th>
                             <th>Image</th>
                             <th>Url</th>
@@ -45,26 +55,32 @@
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('slider.edit', $d->id) }}">Edit</a>
-                                            </li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('slider.show', $d->id) }}">Detail</a></li>
-                                            <li>
-                                                <form class='mt-2' onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('slider.destroy', $d->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type='submit' class='btn btn-danger'>
-                                                        Delete
-                                                    </button>
-                                                </form>
-                                            </li>
+                                            @if (auth()->user()->role == 'admin')
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('slider.edit', $d->id) }}">Edit</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('slider.show', $d->id) }}">Detail</a></li>
+                                                <li>
+                                                    <form class='mt-2' onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                        action="{{ route('slider.destroy', $d->id) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type='submit' class='btn btn-danger'>
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li><a class="dropdown-item"
+                                                        href="{{ route('slider.show', $d->id) }}">Detail</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
-                                <td>{{ $d->name }}</td>
+                                <td>{{ $d->title }}</td>
                                 <td>{{ $d->text }}</td>
-                                <td><img src="{{ asset('/storage/image/' . $d->image) }}" alt="slider_image"
+                                <td><img src="{{ asset('storage/sliders/' . $d->image) }}" alt="slider_image"
                                         class="w-25 rounded">
                                 </td>
                                 <td>{{ $d->url }}</td>
