@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>@yield('title'){{ config('LoakStation') }}</title>
+    <title>@yield('title') | LocalGems{{ config('LoakStation') }}</title>
     <link rel="icon" type="x-icon" href="{{ asset('favicon-32x32.png') }}">
     @yield('style')
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />

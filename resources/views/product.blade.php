@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Produk | LocalGems')
+@section('title', 'Produk')
 @section('style')
     <meta name="_token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/products.css') }}">

@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Loak Station')
+@section('title', 'LocalGems')
 
 @section('content')
     @if (session('success'))
