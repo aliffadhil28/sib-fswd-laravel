@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'LocalGems')
+@section('title', 'Home')
 
 @section('content')
     @if (session('success'))

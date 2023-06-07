@@ -78,7 +78,7 @@
                                 <td>{{ $d->name }}</td>
                                 <td>{{ $d->email }}</td>
                                 <td><img src="{{ asset('storage/avatar/' . $d->avatar) }}" alt="user-avatar"
-                                        class="w-75 rounded">
+                                        class="w-25 rounded">
                                 </td>
                                 <td>{{ $d->address }}</td>
                                 <td>{{ $d->role }}</td>

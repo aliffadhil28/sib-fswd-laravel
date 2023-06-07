@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         $data = User::findOrFail($id);
 
-        return view('user.edit',compact('data'));
+        return view('dashboard.user.edit',compact('data'));
     }
 
     public function update(Request $request, $id): RedirectResponse
